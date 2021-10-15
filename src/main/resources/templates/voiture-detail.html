@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <div data-th-replace="fragments/header :: header-base"/>
+  <div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+  <div data-th-replace="fragments/header :: nav"/>
+
+  <!-- inner-apge-banner start -->
+  <section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <h2 class="page-title">reservation</h2>
+                  <ol class="page-list">
+                      <li><a data-th-href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+                      <li><a data-th-href="@{/voitures}">Les voitures</a></li>
+                      <li>Details</li>
+                  </ol>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- inner-apge-banner end -->
+
+  <!-- car-search-section start -->
+  <section class="car-search-section pt-120 pb-120">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8">
+                  <div class="blog-details">
+                      <div class="thumb">
+                          <img data-th-src="@{${'/downloadfile/'+ detailVoiture.photoDefault}}" alt="image">
+                      </div>
+                      <ul class="post-meta">
+                          <li><i class="fa fa-car"></i><span data-th-text="${detailVoiture.marque}">model 2014ib</span></li>
+                          <li><i class="fa fa-car"></i><span data-th-text="${detailVoiture.modele}">model 2014ib</span></li>
+                          <li><i class="fa fa-tachometer"></i><span data-th-text="${detailVoiture.annee}">32000 KM</span></li>
+                      </ul>
+                      <div class="content">
+                          <h6 class="name" data-th-text="${detailVoiture.nom}"><a href="#0">Gage Ullrich</a></h6>
+                          <span data-th-text="${detailVoiture.nomCategory}">author</span>
+                          <p data-th-text="${detailVoiture.description}">sagittis justo velit.</p>
+                          <div class="row">
+                              <div class="col-md-4 col-6" data-th-each="photo : ${detailVoiture.photosList}">
+                                  <div class="block-img">
+                                      <img data-th-src="@{${'/downloadfile/'+ photo}}" alt="image">
+                                  </div>
+                              </div><!-- block-img end -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <aside class="sidebar">
+                      <div class="widget widget-reservation">
+                          <h4 class="widget-title">reservation</h4>
+                          <div class="widget-body">
+                              <div  id="addReserverByUtilisateur-form-alert-echec" class="alert alert-danger" role="alert">
+                                  Veuillez vous connecter avant de pourvoir faire une reservation
+                              </div>
+                              <form class="car-search-form" data-th-action="@{/reserver}" method="POST" id="addReserverByUtilisateur-form">
+                                  <div class="row">
+                                      <div class="col-lg-12 form-group">
+                                          <select name="idCategory" >
+                                              <option value="0" selected>Choose Your Car Type</option>
+                                              <option
+                                                      data-th-each="categorie : ${listCateogries}"
+                                                      data-th-value="${categorie.id}"
+                                                      data-th-text="${categorie.nom}"
+                                              >
+                                                  One
+                                              </option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <i class="fa fa-map-marker"></i>
+                                          <input type="text" class="form-control has-icon" name="adresseDepart" placeholder="Adresse de depart">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <i class="fa fa-map-marker"></i>
+                                          <input type="text" class="form-control has-icon" name="adresseRetour" placeholder="Adresse de retour">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type='date' class='form-control' name="dateDepart" placeholder="Pickup Date">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type="time" class="form-control" name="heureDepart" placeholder="Pickup Time">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type='date' class='form-control ' name="dateRetour" placeholder="Drop Off Date">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type="time" class="form-control" name="heureRetour" placeholder="Drop Off Time">
+                                      </div>
+                                  </div>
+                                  <button type="submit" class="cmn-btn">Reservation</button>
+                                  <div id="addReserverByUtilisateur-form-alert-success" class="alert alert-success" role="alert">
+                                      Reservation effectuee avec succes
+                                  </div>
+                              </form>
+                          </div>
+                      </div><!-- widget end -->
+                      <div class="widget widget-testimonial">
+                          <h4 class="widget-title">testimonial</h4>
+                          <div class="widget-body">
+                              <div class="testimonial-slider owl-carousel">
+                                  <div class="testimonial-item">
+                                      <div class="testimonial-item--header">
+                                          <div class="thumb"><img data-th-src="@{/assets/images/testimonial/1.jpg}" alt="image"></div>
+                                          <div class="content">
+                                              <h6 class="name">moussa ndiaye</h6>
+                                              <span class="designation">business man</span>
+                                          </div>
+                                      </div>
+                                      <div class="testimonial-item--body">
+                                          <p>On trouve tout d’abord celles que l’on nomme les mini-citadines.</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div><!-- widget end -->
+                  </aside>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- car-search-section end -->
+
+
+  <div data-th-replace="fragments/footer :: footer"/>
+
+  <script !src="">
+
+    fcListReserverByUtilisateur();
+
+  </script>
+
+</body>
+
+</html>

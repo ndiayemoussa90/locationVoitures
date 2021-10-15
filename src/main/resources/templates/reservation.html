@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <div data-th-replace="fragments/header :: header-base"/>
+  <div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+  <div data-th-replace="fragments/header :: nav"/>
+
+  <!-- inner-apge-banner start -->
+  <section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-title">reservation</h2>
+          <ol class="page-list">
+            <li><a data-th-href="@{/}"><i class="fa fa-home"></i> Accueil</a></li>
+            <li>reservation</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- inner-apge-banner end -->
+
+
+
+  <!-- reservation-section start -->
+  <section class="reservation-section pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="choose-car-slider owl-carousel">
+                    <div class="car-item" data-th-each="car : ${listCars}">
+                        <div class="thumb">
+                            <img data-th-src="@{${'/downloadfile/'+ car.photoDefault}}" alt="image">
+                        </div>
+                        <div class="car-item-body">
+                            <div class="content">
+                                <h4 class="title" data-th-text="${car.marque}">Marque</h4>
+                                <label> <span class="price" data-th-text="'A partir de '+${car.tarif}+'FCFA'"></span></label>
+                                <p data-th-text="${car.description}"></p>
+                                <a href="reservation" class="cmn-btn">je loues</a>
+                            </div>
+                            <div class="car-item-meta">
+                                <ul class="details-list">
+                                    <li><i class="fa fa-car" data-th-text="${' '+car.modele}"></i></li>
+                                    <li><i class="fa fa-tachometer" data-th-text="${' '+car.annee}"></i></li>
+                                    <li><i class="fa fa-sliders"></i>auto</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- car-item end -->
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+      <div class="row">
+        <div class="col-lg-8">
+
+            <div class="content">
+              <div class="content-block"></br></br></br></br></br>
+                <h3 class="car-name">LOUER A BON PRIX</h3></br>
+                <span class="price">Motant a payé par jour: 20.000 fcfa</span>
+                <p>Paymar Gestion de Location de voitures</p>
+              </div>
+
+              <form  method="POST" data-th-action="@{/addreservation}">
+                  <div class="form-group col-md-6">
+                      <i class="fa fa-calendar"></i>
+                      <input type='text' class='form-control has-icon datepicker-here' name="dateDepart" placeholder="Date Depart">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <i class="fa fa-calendar"></i>
+                      <input type='text' class='form-control has-icon datepicker-here' name="dateDepart" placeholder="Date retour">
+                  </div>
+                  <div class="col-md-6">
+                      <button type="reset" class="btn btn-primary">Annuler</button>
+                      <button type="submit" class="btn btn-primary">Reserver</button>
+                  </div>
+              </form>
+                  
+            </div>
+
+        </div>
+      </div>
+          
+    </div>
+       
+       <div class="col-lg-4">
+          <aside class="sidebar">
+            
+            <div  class=""> <!-- widget widget-testimonial -->
+              <h4 class="widget-title">Testimonial</h4>
+              
+              <div class="widget-body">
+                <div class="testimonial-slider owl-carousel">
+                  <div class="testimonial-item">
+                    <div class="testimonial-item--header">
+                      <div class="thumb"><img src="assets/images/testimonial/1.jpg" alt="image"></div>
+                      <div class="content">
+                        <h6 class="name">Moussa Ndiaye</h6>
+                        <span class="designation">business man</span>
+                      </div>
+                    </div>
+                    <div class="testimonial-item--body">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- widget end -->
+          </aside>
+        </div><!--  -->
+
+  </section>
+  <!-- reservation-section end -->
+
+  <div data-th-replace="fragments/footer :: footer"/>
+
+</body>
+
+</html>

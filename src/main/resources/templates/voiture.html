@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <div data-th-replace="fragments/header :: header-base"/>
+  <div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+  <div data-th-replace="fragments/header :: nav"/>
+
+
+  <!-- inner-apge-banner start -->
+  <section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <ol class="page-list">
+                      <li><a data-th-href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+                      <li><a>Les voitures</a></li>
+                  </ol>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- inner-apge-banner end -->
+
+  <!-- car-search-section start -->
+  <section class="car-search-section pt-120 pb-120">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="car-search-filter-area">
+                      <div class="car-search-filter-form-area">
+                          <form class="car-search-filter-form">
+                              <div class="row justify-content-between">
+                                  <div class="col-lg-4 col-md-5 col-sm-6">
+                                      <div class="cart-sort-field">
+                                          <span class="caption">Sort by : </span>
+                                          <select>
+                                              <option value="0" selected>Choisir vtre Type de voiture</option>
+                                              <option
+                                                  data-th-each="categorie : ${listCateogries}"
+                                                  data-th-value="${categorie.id}"
+                                                  data-th-text="${categorie.nom}"&>
+                                                  One
+                                              </option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-7 col-md-7 col-sm-6 d-flex">
+                                      <input type="text" name="car_search" id="car_search" placeholder="Search what you want........">
+                                      <button class="search-submit-btn">Search</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="view-style-toggle-area">
+                          <button class="view-btn list-btn"><i class="fa fa-bars"></i></button>
+                          <button class="view-btn grid-btn active"><i class="fa fa-th-large"></i></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row mt-70">
+              <div class="col-lg-8">
+                  <div class="car-search-result-area grid--view row mb-none-30">
+                      <div class="col-md-6 col-12" data-th-each="car : ${listCars}">
+                          <div class="car-item">
+                              <div class="thumb bg_img" data-th-data-background="@{${'/downloadfile/'+ car.photoDefault}}"></div>
+                              <div class="car-item-body">
+                                  <div class="content">
+                                      <h3 class="title" data-th-text="${car.nom}">pajero rang</h3>
+                                      <h4 class="title" data-th-text="${car.nomCategory}">pajero rang</h4>
+                                      <span class="price" data-th-text="${car.tarif}">start form $20 per day</span>
+                                      <p data-th-text="${car.description}">Aliquam sollicitudin dolores tristiquvel ornare, vitae aenean.</p>
+                                      <a data-th-href="@{${'/voitures/'+ car.id}}" class="cmn-btn">voir détail</a>
+                                  </div>
+                                  <div class="car-item-meta">
+                                      <ul class="details-list">
+                                          <li><i class="fa fa-car"></i><span data-th-text="${car.marque}">model 2014ib</span></li>
+                                          <li><i class="fa fa-car"></i><span data-th-text="${car.modele}">model 2014ib</span></li>
+                                      </ul>
+                                      <ul class="details-list">
+                                          <li><i class="fa fa-tachometer"></i><span data-th-text="${car.annee}">32000 KM</span></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div><!-- car-item end -->
+                  </div>
+                  <nav class="d-pagination" aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item"><a class="page-link" href="#">4</a></li>
+                          <li class="page-item"><a class="page-link" href="#">5</a></li>
+                      </ul>
+                  </nav>
+              </div>
+              <div class="col-lg-4">
+                  <aside class="sidebar">
+                      <div class="widget widget-reservation">
+                          <h4 class="widget-title">reservation</h4>
+                          <div class="widget-body">
+                              <div  id="addReserverByUtilisateur-form-alert-echec" class="alert alert-danger" role="alert">
+                                  Veuillez vous connecter avant de pourvoir faire une reservation
+                              </div>
+                              <form class="car-search-form" data-th-action="@{/reserver}" method="POST" id="addReserverByUtilisateur-form">
+                                  <div class="row">
+                                      <div class="col-lg-12 form-group">
+                                          <select name="idCategory" >
+                                              <option value="0" selected>Choisir votre Type de voiture</option>
+                                              <option
+                                                  data-th-each="categorie : ${listCateogries}"
+                                                  data-th-value="${categorie.id}"
+                                                  data-th-text="${categorie.nom}"
+                                              >
+                                                  One
+                                              </option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <i class="fa fa-map-marker"></i>
+                                          <input type="text" class="form-control has-icon" name="adresseDepart" placeholder="Adresse de depart">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <i class="fa fa-map-marker"></i>
+                                          <input type="text" class="form-control has-icon" name="adresseRetour" placeholder="Adresse de retour">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type='date' class='form-control' name="dateDepart" placeholder="Pickup Date">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type="time" class="form-control" name="heureDepart" placeholder="Pickup Time">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type='date' class='form-control ' name="dateRetour" placeholder="Drop Off Date">
+                                      </div>
+                                      <div class="form-group col-md-12">
+                                          <input type="time" class="form-control" name="heureRetour" placeholder="Drop Off Time">
+                                      </div>
+                                  </div>
+                                  <button type="submit" class="cmn-btn">Reservation</button>
+                                  <div id="addReserverByUtilisateur-form-alert-success" class="alert alert-success" role="alert">
+                                      Reservation effectuee avec succes
+                                  </div>
+                              </form>
+                          </div>
+                      </div><!-- widget end -->
+                      <div class="widget widget-testimonial">
+                          <h4 class="widget-title">testimonial</h4>
+                          <div class="widget-body">
+                              <div class="testimonial-slider owl-carousel">
+                                  <div class="testimonial-item">
+                                      <div class="testimonial-item--header">
+                                          <div class="thumb"><img data-th-src="@{/assets/images/testimonial/1.jpg}" alt="image"></div>
+                                          <div class="content">
+                                              <h6 class="name">moussa ndiaye</h6>
+                                              <span class="designation">business man</span>
+                                          </div>
+                                      </div>
+                                      <div class="testimonial-item--body">
+                                          <p>On trouve tout d’abord celles que l’on nomme les mini-toyota.</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div><!-- widget end -->
+                  </aside>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- car-search-section end -->
+
+
+  <div data-th-replace="fragments/footer :: footer"/>
+
+  <script !src="">
+
+    fcListReserverByUtilisateur();
+
+  </script>
+
+</body>
+
+</html>

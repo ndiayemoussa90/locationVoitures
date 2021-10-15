@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header :: header-base"/>
+	<div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+
+<!-- banner-section start  -->
+<section class="banner-section bg_img" data-th-data-background="@{/assets/images/banner.jpg}">
+   <div class="container">
+       <div class="row align-items-center">
+           <div class="col-md-7">
+               <div class="banner-content">
+                   <h1 class="title">Conduire en toute sécurité</h1>
+                   <p>Paymar gestion de location de voitures met à votre disposition des véhicules de luxes ,pour vos déplacements au niveau national.
+				   Ferrari;Mercedes ... qui n'a pas envie d'etre au volant d'une voiture de luxes.</p>
+                   <a data-th-href="@{/voitures}" class="cmn-btn">Voir toutes les voitures</a>
+               </div>
+           </div>
+           <div class="col-md-5">
+               <div class="banner-img">
+                   <img data-th-src="@{/assets/images/elements/car.png}" alt="image">
+                   <img data-th-src="@{/assets/images/elements/car.png}" alt="image">
+               </div>
+           </div>
+       </div>
+   </div>
+</section>
+<!-- banner-section end  -->
+
+
+<!-- search-section start -->
+<section class="search-section pt-120 pb-120">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-lg-12">
+				<div class="car-search-area">
+					<div  id="addReserverByUtilisateur-form-alert-echec" class="alert alert-danger" role="alert">
+						Veuillez vous connecter avant de pourvoir faire une reservation
+					</div>
+					<form class="car-search-form" data-th-action="@{/reserver}" method="POST" id="addReserverByUtilisateur-form">
+						<div class="row">
+							<div class="col-lg-12 form-group">
+								<select name="idCategory" >
+									<option value="0" selected>Choose Your Car Type</option>
+									<option
+											data-th-each="categorie : ${listCateogries}"
+											data-th-value="${categorie.id}"
+											data-th-text="${categorie.nom}"
+									>
+										One
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<i class="fa fa-map-marker"></i>
+								<input class="form-control has-icon" type="text" name="adresseDepart" placeholder="Pickup Location">
+							</div>
+							<div class="form-group col-md-6">
+								<i class="fa fa-map-marker"></i>
+								<input class="form-control has-icon" type="text" name="adresseRetour" placeholder="Drop Off Location">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<input type='date' class='form-control' name="dateDepart" placeholder="Pickup Date">
+							</div>
+							<div class="form-group col-md-6">
+								<input type="time" class="form-control" name="heureDepart" placeholder="Pickup Time">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<input type='date' class='form-control ' name="dateRetour" placeholder="Drop Off Date">
+							</div>
+							<div class="form-group col-md-6">
+								<input type="time" class="form-control" name="heureRetour" placeholder="Drop Off Time">
+							</div>
+						</div>
+						<button type="submit" class="cmn-btn btn-radius">Reservation</button>
+						<div id="addReserverByUtilisateur-form-alert-success" class="alert alert-success" role="alert">
+							Reservation effectuee avec succes
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- search-section end -->
+<section class="choose-car-section pt-120 pb-120 section-bg">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6">
+				<div class="section-header text-center">
+					<h2 class="section-title"></h2>
+					<p>Paymar gestion de location de voitures </p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="choose-car-slider owl-carousel">
+					<div class="car-item" data-th-each="car : ${listCars}">
+						<div class="thumb">
+							<img data-th-src="@{${'/downloadfile/'+ car.photoDefault}}" alt="image">
+						</div>
+						<div class="car-item-body">
+							<div class="content">
+								<h4 class="title" data-th-text="${car.nom}">pajero rang</h4>
+								<h3 class="title" data-th-text="${car.nomCategory}">pajero rang</h3>
+								<span class="price" data-th-text="${car.tarif}">start form $20 per day</span>
+								<p data-th-text="${car.description}">Venez visiter nos locaux.</p>
+								<a data-th-href="@{${'/voitures/'+ car.id}}" class="cmn-btn">voir détail</a>
+							</div>
+							<div class="car-item-meta">
+								<ul class="details-list">
+									<li><i class="fa fa-car"></i><span data-th-text="${car.marque}">model 2014ib</span></li>
+									<li><i class="fa fa-car"></i><span data-th-text="${car.modele}">model 2014ib</span></li>
+									<li><i class="fa fa-tachometer"></i><span data-th-text="${car.annee}">32000 KM</span></li>
+								</ul>
+							</div>
+						</div>
+					</div><!-- car-item end -->
+				</div>
+			</div>
+			<div class="col-lg-4">
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- choose-car-section end -->
+
+<!-- testimonial-section start -->
+<center>
+<marquee>
+	<img data-th-src="@{/assets/images/cars/1.jpg}" alt="image">
+	<img data-th-src="@{/assets/images/cars/2.jpg}" alt="image">
+	<img data-th-src="@{/assets/images/cars/5.jpg}" alt="image">
+</marquee></center>
+<!-- testimonial-section end -->
+
+<!-- blog-section start -->
+<section class="blog-section pt-120 pb-120">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6">
+				<div class="section-header text-center">
+					<h2 class="section-title">les nouvelles générations</h2>
+					<p> On trouve tout d’abord celles que l’on nomme les mini-citadines du type Smart Fortwo.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row mb-none-30">
+			<div class="col-lg-6" data-th-each="categorie : ${listCateogries}">
+				<div class="post-item post-item--grid">
+					<div class="thumb bg_img" data-th-data-background="@{${'/downloadfile/'+ categorie.photo}}">
+						<ul class="post-meta d-flex">
+						</ul>
+					</div>
+					<div class="content">
+						<h5 class="post-title" ><a href="#0" data-th-text="${categorie.nom}">Elements</a></h5>
+						<p data-th-text="${categorie.description}">Paymar gestion de location de voitures</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- blog-section end  -->
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+	<script !src="">
+
+    fcListReserverByUtilisateur();
+
+  </script>
+
+
+</body>
+
+</html>

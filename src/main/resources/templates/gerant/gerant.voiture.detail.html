@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header :: header-base"/>
+	<div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+	<!-- inner-apge-banner start -->
+	<section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="page-title">Gérant</h2>
+					<ol class="page-list">
+						<li><a data-th-href="@{/gerant/index}"><i class="fa fa-home"></i>Accueil</a></li>
+						<li><a data-th-href="@{/gerant/voitures}"><i class="fa fa-home"></i>Gestion voitures</a></li>
+						<li>Détail voiture</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- inner-apge-banner end -->
+
+
+<!-- blog-details-section start -->
+<section class="blog-details-section pt-120 pb-120">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="blog-details">
+					<div class="content">
+						<div class="row">
+							<div class="col-md-4 col-6" data-th-each="photo : ${detailVoiture.photosList}">
+								<div class="block-img">
+									<form data-th-action="@{${'/gerant/voitures/'+ detailVoiture.id + '/' + photo}}" method="POST">
+										<button type="submit" class="badge badge-pill badge-danger">
+											<i class="fa fa-times me-1"></i>
+										</button>
+									</form>
+									<img data-th-src="@{${'/downloadfile/'+ photo}}" alt="image">
+								</div>
+							</div><!-- block-img end -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<aside class="sidebar">
+					<div class="widget widget-all-cars">
+						<h4 class="widget-title">Plus Images</h4>
+						<div class="widget-body">
+							<form method="POST" enctype="multipart/form-data" data-th-action="@{${'/gerant/voitures/'+ detailVoiture.id}}">
+								<div class="mb-3 row">
+									<input type="file" name="file" id="detailVoitureByGerant-file">
+								</div>
+								<button class="btn btn-primary" type="submit">Ajouter</button>
+							</form>
+						</div>
+					</div><!-- widget end -->
+					<div class="widget widget-archive">
+						<h4 class="widget-title" data-th-text="${detailVoiture.nom}"></h4>
+						<div class="widget-body">
+							<ul class="archive-list">
+								<li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">
+									Catégorie<span data-th-text="${' '+detailVoiture.nomCategory}">2019</span>
+								</a></li>
+								<li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">
+									Marque<span data-th-text="${' '+detailVoiture.marque}">2019</span>
+								</a></li>
+								<li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">
+									Modele<span data-th-text="${' '+detailVoiture.modele}">2019</span>
+								</a></li>
+								<li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">
+									Année<span data-th-text="${' '+detailVoiture.annee}">2019</span>
+								</a></li>
+								<li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">
+									Tarif<span data-th-text="${' '+detailVoiture.tarif}">2019</span>
+								</a></li>
+								<li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">
+									Description<span data-th-text="${' '+detailVoiture.description}">2019</span>
+								</a></li>
+							</ul>
+						</div>
+					</div><!-- widget end -->
+				</aside>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- blog-details-section end -->
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+
+</body>
+</html>

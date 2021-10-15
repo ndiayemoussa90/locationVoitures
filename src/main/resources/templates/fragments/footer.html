@@ -1,0 +1,102 @@
+<div data-th-fragment="footer">
+    <!-- footer-section start -->
+    <footer class="footer-section">
+        <div class="footer-top pt-120 pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-8">
+                        <div class="footer-widget widget-about">
+                            <div class="widget-about-content">
+                                <a href="index.html" class="footer-logo"><img data-th-src="@{/assets/images/logo1.png}" alt="logo"></a>
+                                <p>Paymar Gestion Location de voitures </p>
+                                <ul class="social-links">
+                                    <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4">
+                        <div class="footer-widget widget-menu">
+                            <h4 class="widget-title">Les voitures</h4>
+                            <ul>
+                                <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">mistubishi lancer</a></li>
+                                <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">forester subar</a></li>
+                                <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">mirage ange</a></li>
+                                <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">pajero range</a></li>
+                                <li><a data-th-href="@{${ #httpServletRequest.requestURI + '#0' }}">subaru liberty</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4">
+                        <div class="footer-widget widget-menu">
+                            <h4 class="widget-title">Les liens</h4>
+                            <ul>
+                                <li><a data-th-href="@{/}">Accueil</a></li>
+                                <li><a data-th-href="@{/voitures}">Voitures</a></li>
+                                <li data-sec-authorize="hasRole('UTILISATEUR')">
+                                    <a data-th-href="@{/client}">Mes réservations</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-8">
+                        <div class="footer-widget widget-address">
+                            <h4 class="widget-title">contacter nos services</h4>
+                            <ul>
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>DAKAR, NY 10012, Rue 10 keur Mbaye Fall</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <span>www.paymarlocation@gmail.com www.notresupport/info@gmail.com</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone-square"></i>
+                                    <span>00221-071-16-90 , +221-572-98-95 +221-77-905-00-93</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-section end -->
+
+    <!-- scroll-to-top start -->
+    <div class="scroll-to-top">
+        <span class="scroll-icon"><i class="fa fa-rocket"></i></span>
+    </div>
+    <!-- scroll-to-top end -->
+
+    <!-- jquery js link -->
+    <script data-th-src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+    <!-- jquery migrate js link -->
+    <script data-th-src="@{/assets/js/jquery-migrate-3.0.0.js}"></script>
+    <!-- bootstrap js link -->
+    <script data-th-src="@{/assets/js/bootstrap.min.js}"></script>
+    <!-- lightcase js link -->
+    <script data-th-src="@{/assets/js/lightcase.js}"></script>
+    <!-- wow js link -->
+    <script data-th-src="@{/assets/js/wow.min.js}"></script>
+    <!-- nice select js link -->
+    <script data-th-src="@{/assets/js/jquery.nice-select.min.js}"></script>
+    <!-- datepicker js link -->
+    <script data-th-src="@{/assets/js/datepicker.min.js}"></script>
+    <script data-th-src="@{/assets/js/datepicker.en.js}"></script>
+    <!-- wickedpicker js link -->
+    <script data-th-src="@{/assets/js/wickedpicker.min.js}"></script>
+    <!-- owl carousel js link -->
+    <script data-th-src="@{/assets/js/owl.carousel.min.js}"></script>
+    <!-- jquery ui js link -->
+    <script data-th-src="@{/assets/js/jquery-ui.min.js}"></script>
+    <!-- main js link -->
+    <script data-th-src="@{/assets/js/main.js}"></script>
+    <!-- script js link -->
+    <script data-th-src="@{/js/scripts.js}"></script>
+
+</div>

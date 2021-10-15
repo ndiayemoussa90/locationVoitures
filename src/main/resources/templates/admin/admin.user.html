@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header :: header-base"/>
+	<div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+	<!-- inner-apge-banner start -->
+	<section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="page-title">Administration</h2>
+					<ol class="page-list">
+						<li><a data-th-href="@{/admin/index}"><i class="fa fa-home"></i>Accueil</a></li>
+						<li>Gestion gérants</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<section class="car-search-section pt-120 pb-120">
+	<div class="container">
+		<div class="row card">
+			<div class="card-header">
+				<i class="fa fa-table me-1"></i>
+				Liste des gerants
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#addGerantByAdminModal">
+						<i class="fa fa-plus me-1"></i> Ajout gerant
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<p data-th-if="${#lists.isEmpty(listGerants)}">Aucun gerant</p>
+				<table id="datatablesSimple" data-th-if="${ not#lists.isEmpty(listGerants)}" class="table table-sm">
+					<thead class="thead-dark">
+					<tr>
+						<th scope="col">Prénom</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Telephone</th>
+						<th scope="col">Email</th>
+						<th scope="col">Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr data-th-each="gerant: ${listGerants}" data-th-id="${gerant.id}" class="tr-sm">
+						<td data-th-text="${gerant.firstName}" />
+						<td data-th-text="${gerant.lastName}" />
+						<td data-th-text="${gerant.phoneNumber}" />
+						<td data-th-text="${gerant.username}" />
+						<td>
+							<button type="button" class="btn btn-warning" data-toggle="modal"
+									data-target="#editGerantByAdminModal" data-th-data-gerant="${gerant}"
+							><i class="fa fa-edit me-1"></i> Editer
+							</button>
+							<button type="button" class="btn btn-danger" data-toggle="modal"
+									data-target="#deleteGerantByAdminModal" data-th-data-gerant="${gerant}"
+							><i class="fa fa-times me-1"></i> Supprimer
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- contact-section end -->
+
+	<!-- car-search-section end -->
+<div class="modal fade" id="addGerantByAdminModal" tabindex="-1" aria-labelledby="addGerantByAdminModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addGerantByAdminModalLabel">Nouveau gerant</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/admin/users}" method="post" id="addGerantByAdmin-form">
+					<div class="form-group row">
+						<label for="addGerantByAdmin-firstName" class="col-sm-2 col-form-label">Prenom</label>
+						<div class="col-sm-10">
+							<input type="text" name="firstName" class="form-control" id="addGerantByAdmin-firstName" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-lastName" class="col-sm-2 col-form-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" name="lastName" class="form-control" id="addGerantByAdmin-lastName" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-phoneNumber" class="col-sm-2 col-form-label">Téléphone</label>
+						<div class="col-sm-10">
+							<input type="phone" name="phoneNumber" class="form-control" id="addGerantByAdmin-phoneNumber" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-email" class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-10">
+							<input type="email" name="username" class="form-control" id="addGerantByAdmin-email" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-password" class="col-sm-2 col-form-label">Mot de passe</label>
+						<div class="col-sm-10">
+							<input type="password" name="password" class="form-control" id="addGerantByAdmin-password" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-confirm-password" class="col-sm-2 col-form-label">Confirmer Mot de passe</label>
+						<div class="col-sm-10">
+							<input type="password" name="passwordConfirmed" class="form-control" id="addGerantByAdmin-confirm-password" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+						<button type="submit" class="btn btn-primary">Ajouter</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Edit ADMIN-->
+<div class="modal fade" id="editGerantByAdminModal" tabindex="-1" aria-labelledby="editGerantByAdminModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editGerantByAdminModalLabel">Editer admin</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/admin/users}" method="put" id="editGerantByAdmin-form">
+					<div class="form-group row">
+						<label for="addGerantByAdmin-firstName" class="col-sm-2 col-form-label">Prenom</label>
+						<div class="col-sm-10">
+							<input type="text" name="firstName" class="form-control" id="editGerantByAdmin-firstName" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-lastName" class="col-sm-2 col-form-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" name="lastName" class="form-control" id="editGerantByAdmin-lastName" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-phoneNumber" class="col-sm-2 col-form-label">Téléphone</label>
+						<div class="col-sm-10">
+							<input type="phone" name="phoneNumber" class="form-control" id="editGerantByAdmin-phoneNumber" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-email" class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-10">
+							<input type="email" name="username" class="form-control" id="editGerantByAdmin-email" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-password" class="col-sm-2 col-form-label">Mot de passe</label>
+						<div class="col-sm-10">
+							<input type="password" name="password" class="form-control" id="editGerantByAdmin-password" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addGerantByAdmin-confirm-password" class="col-sm-2 col-form-label">Confirmer Mot de passe</label>
+						<div class="col-sm-10">
+							<input type="password" name="passwordConfirmed" class="form-control" id="editGerantByAdmin-confirm-password" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+						<button type="submit" class="btn btn-primary">Modifier</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Supprimer ADMIN-->
+<div class="modal fade" id="deleteGerantByAdminModal" tabindex="-1" aria-labelledby="deleteGerantByAdminModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteGerantByAdminModalLabel">Supprimer admin</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/admin/users}" method="delete" id="deleteGerantByAdmin-form">
+					<div class="mb-3">Voulez-vous supprimer le gerant <span id="deleteGerantByAdmin-username"></span> ?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+						<button type="submit" class="btn btn-primary">Supprimer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+<!-- Modal Ajout GERANT-->
+<script !src="">
+
+    //////// FUNCTION LIST ADMIN
+    fcListGerantByAdminModal();
+
+</script>
+
+</body>
+</html>

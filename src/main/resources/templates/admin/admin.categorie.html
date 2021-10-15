@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header :: header-base"/>
+	<div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+	<!-- inner-apge-banner start -->
+	<section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="page-title">Administration</h2>
+					<ol class="page-list">
+						<li><a data-th-href="@{/admin/index}"><i class="fa fa-home"></i>Accueil</a></li>
+						<li>Gestion catégories</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- blog-section start -->
+<section class="blog-section pt-120 pb-120">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="post-item post-item--list">
+					<div class="card-body" data-th-if="${ not#lists.isEmpty(listCategories)}">
+						<table id="datatablesSimple">
+							<tbody>
+							<tr data-th-each="categorie: ${listCategories}" data-th-id="${categorie.id}">
+								<td width="25%">
+									<img data-th-src="@{${'/downloadfile/'+ categorie.photo}}" alt="loader" style="width: 150px;height: 120px;" id="loader">
+								</td>
+								<td width="25%" colspan="2" data-th-text="${categorie.nom}" />
+								<td width="25%" colspan="2" data-th-text="${categorie.description}" />
+								<td>
+									<form data-th-action="@{${'/admin/categories/'+ categorie.id}}" method="POST">
+										<button type="submit" class="btn btn-sm btn-danger">
+											<i class="fa fa-times me-1"></i> Supprimer
+										</button>
+									</form>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div><!-- post-item end -->
+			</div>
+			<div class="col-lg-4">
+				<aside class="sidebar">
+					<div class="widget widget-all-cars">
+						<div data-th-if="${message}"><h2 data-th-text="${message}"/></div>
+						<form method="POST" enctype="multipart/form-data" data-th-action="@{/admin/categories}">
+							<div class="form-group">
+								<label for="addCategorieByAdmin-nom">Categorie</label>
+								<input type="text" class="form-control" name="nom" id="addCategorieByAdmin-nom" placeholder="name@example.com">
+							</div>
+							<div class="form-group">
+								<label for="addCategorieByAdmin-description">Description</label>
+								<textarea name="description" class="form-control" id="addCategorieByAdmin-description" rows="3"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="addCategorieByAdmin-file">Photo</label>
+								<input type="file" name="file" id="addCategorieByAdmin-file" placeholder="name@example.com">
+							</div>
+							<button class="btn btn-primary" type="submit">Ajouter</button>
+						</form>
+					</div><!-- widget end -->
+				</aside>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- blog-section end -->
+
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+</body>
+</html>

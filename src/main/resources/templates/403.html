@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <div data-th-replace="fragments/header :: header-base"/>
+  <div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+
+  <!-- inner-apge-banner start -->
+  <section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-title">page not found</h2>
+          <ol class="page-list">
+            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+            <li>404</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- inner-apge-banner end -->
+
+  <!-- error-section start -->
+  <section class="error-section pt-120 pb-120">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="error-content text-center">
+            <img data-th-src="@{/assets/images/elements/404.png}" alt="image">
+            <h2 class="title">Oops! sorry  paymar  !!!!!!! </h2>
+            <p>Votre sécurité c'est notre priorité.......................................</p>
+            <a href="index.html" class="cmn-btn">got to home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- error-section end -->
+
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+</body>
+</html>

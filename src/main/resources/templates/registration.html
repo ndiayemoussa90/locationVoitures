@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <div data-th-replace="fragments/header :: header-base"/>
+  <div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+  <!-- inner-apge-banner start -->
+  <section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-title">Créer mon compte client</h2>
+          <ol class="page-list">
+            <li><a data-th-href="@{/}"><i class="fa fa-home"></i>Accueil</a></li>
+            <li>Inscription</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- inner-apge-banner end -->
+  <section data-th-if="${param.success}" class="error-section pt-120 pb-120">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="error-content text-center">
+            <img src="assets/images/elements/success.png" alt="image" class="img-success">
+            <h2 class="title">Félicitation! Vous avez créer votre compte </h2>
+            <p>Connectez vous à présent à votre compte</p>
+            <a data-th-href="@{/login}" class="cmn-btn">Se connecter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- registration-section start -->
+  <section class="registration-section pt-120 pb-120">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="registration-block text-center">
+            <div class="registration-block-inner">
+              <h3 class="title">Je crée mon compte</h3>
+              <div data-th-if="${param.errorUsername}">
+                <div class="alert alert-danger">Echec: L'email est déjà enregistré</div>
+              </div>
+              <form class="registration-form" data-th-action="@{/signin}" method="post">
+                <div class="frm-group">
+                  <input type="text" name="firstName" id="f-name" placeholder="Prénom">
+                </div>
+                <div class="frm-group">
+                  <input type="text" name="lastName" id="l-name" placeholder="Nom">
+                </div>
+                  <div class="frm-group">
+                  <input type="text" name="address" id="address" placeholder="votre adresse">
+                </div>
+                <div class="frm-group">
+                  <input type="text" name="cni" id="cni" placeholder="Numero CNI">
+                </div>
+                 <div class="frm-group">
+                  <input type="text" name="phoneNumber" id="phoneNumber" placeholder="numero de telephone">
+                </div>
+                <div class="frm-group">
+                   <input type="text" name="username" id="username" placeholder="aemail">
+                </div>
+                <div class="frm-group">
+                  <input type="password" name="password" id="pass" placeholder="Mot de passe">
+                </div>
+                <div class="frm-group">
+                  <input type="password" name="passwordConfirmed" id="re-pass" placeholder="Répeter mot de passe">
+                </div>
+                <div class="frm-group">
+                  <input type="checkbox" name="checkbox" id="checkbox" value="yes">
+                  <label for="checkbox">Recevoir les actualités</label>
+                </div>
+                <div class="frm-group">
+                  <input type="submit" value="Créer mon compte client">
+                </div>
+              </form>
+<!--              <a data-th-href="@{/login}">Se connecter</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- registration-section end -->
+
+
+  <div data-th-replace="fragments/footer :: footer"/>
+
+</body>
+
+</html>

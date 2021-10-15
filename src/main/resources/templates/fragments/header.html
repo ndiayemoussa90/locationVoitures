@@ -1,0 +1,138 @@
+<div data-th-fragment="header-base">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Paymar Gestion Location de voitures</title>
+
+    <base href="/"><!-- site favicon -->
+    <link rel="shortcut icon" type="image/png" data-th-href="@{/assets/images/favicon.jpg}"/>
+</div>
+<div data-th-fragment="header-css">
+    <!-- fontawesome css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/fontawesome.min.css}">
+    <!-- bootstrap css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/bootstrap.min.css}">
+    <!-- lightcase css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/lightcase.css}">
+    <!-- animate css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/animate.css}">
+    <!-- nice select css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/nice-select.css}">
+    <!-- datepicker css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/datepicker.min.css}">
+    <!-- wickedpicker css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/wickedpicker.min.css}">
+    <!-- jquery ui css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/jquery-ui.min.css}">
+    <!-- owl carousel css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/owl.carousel.min.css}">
+    <!-- main style css link -->
+    <link rel="stylesheet" data-th-href="@{/assets/css/main.css}">
+</div>
+<div data-th-fragment="nav">
+    <!-- preloader start -->
+    <div id="preloader"></div>
+    <!-- preloader end -->
+
+    <!--  header-section start  -->
+    <header class="header-section">
+        <div class="header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <ul class="header-info d-flex justify-content-center">
+                            <li>
+                                <i class="fa fa-map-marker"></i> <p>Dakar, NY 10012, SENEGAL Mitro Road</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-clock-o"></i> <p>Sat - Fri Day 08:00 am - 5.00 pm Sunday Holyday</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="header-action d-flex align-items-center justify-content-end">
+                            <div class="lag-select-area"></div>
+                            <div data-sec-authorize="!isAuthenticated()" class="login-reg">
+                                <a data-th-href="@{/registration}">Inscription</a>
+                                <a data-th-href="@{/login}">Connexion</a>
+                            </div>
+                            <div data-sec-authorize="isAuthenticated()" class="login-reg">
+                                <span data-sec-authentication="name">Username</span>
+                            </div>
+                            <div data-sec-authorize="isAuthenticated()" class="login-reg" data-th-if="${
+                            not#strings.startsWith(#httpServletRequest.requestURI, '/admin/') &&
+                            not#strings.startsWith(#httpServletRequest.requestURI, '/gerant/')
+                        }">
+                                <a data-sec-authorize="hasRole('GERANT')" data-th-href="@{/gerant/index}">Espace gerant</a>
+                                <a data-sec-authorize="hasRole('ADMIN')" data-th-href="@{/admin/index}">Espace admin</a>
+                            </div>
+                            <div data-sec-authorize="isAuthenticated()" class="login-reg">
+                                <a data-th-href="@{/logout}">Deconnecter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg p-0">
+                    <a class="site-logo site-title" data-th-href="@{/}">
+                        <img data-th-src="@{/assets/images/logo1.png}" alt="site-logo">
+                        <span class="logo-icon"><i class="flaticon-fire"></i></span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu-toggle"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav main-menu mr-auto" data-th-if="${
+                            not#strings.startsWith(#httpServletRequest.requestURI, '/admin/') &&
+                            not#strings.startsWith(#httpServletRequest.requestURI, '/gerant/')
+                        }">
+                            <li><a data-th-href="@{/}">Accueil</a></li>
+                            <li><a data-th-href="@{/voitures}">Voitures</a></li>
+                            <li data-sec-authorize="hasRole('UTILISATEUR')">
+                                <a data-th-href="@{/client}">Mes réservations</a>
+                            </li>
+                            <li><a data-th-href="@{/contact}">Contactez-nous</a></li>
+                        </ul>
+
+                        <ul class="navbar-nav main-menu mr-auto" data-th-if="${
+                            #strings.startsWith(#httpServletRequest.requestURI, '/admin/') ||
+                            #strings.startsWith(#httpServletRequest.requestURI, '/gerant/')
+                        }">
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/gerant/') }">
+                                <a data-th-href="@{/gerant/voitures}">Gestion Voitures</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/gerant/') }">
+                                <a data-th-href="@{/gerant/reservations/en-cours}">Reservation en cours </a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/gerant/') }">
+                                <a data-th-href="@{/gerant/reservations}">Toutes les Reservations</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/gerant/') }">
+                                <a data-th-href="@{/gerant/clients}">Gestion Clients</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/admin/') }">
+                                <a data-th-href="@{/admin/users}">Gestion utilisateurs</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/admin/') }">
+                                <a data-th-href="@{/admin/categories}">Gestion Catégories</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/admin/') }">
+                                <a data-th-href="@{/admin/voitures}">Gestion Voitures</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/admin/') }">
+                                <a data-th-href="@{/admin/reservations}">Gestion Reservations</a>
+                            </li>
+                            <li data-th-if="${ #strings.startsWith(#httpServletRequest.requestURI, '/admin/') }">
+                                <a data-th-href="@{/admin/clients}">Gestion Clients</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div><!-- header-bottom end -->
+    </header>
+    <!--  header-section end  -->
+</div>

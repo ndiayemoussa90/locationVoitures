@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header :: header-base"/>
+	<div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+	<!-- inner-apge-banner start -->
+	<section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="page-title">Gérant</h2>
+					<ol class="page-list">
+						<li><a data-th-href="@{/gerant/index}"><i class="fa fa-home"></i>Accueil</a></li>
+						<li>Gestion voitures</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- inner-apge-banner end -->
+
+<!-- blog-section start -->
+<section class="car-search-section pt-120 pb-120">
+	<div class="container">
+		<div class="row card">
+			<div class="card-header">
+				<i class="fa fa-table me-1"></i>
+				LListe des voitures
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#addVoitureByGerantModal">
+						<i class="fa fa-plus me-1"></i> Ajout voiture
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<p data-th-if="${#lists.isEmpty(listVoitures)}">Aucune voiture</p>
+				<table id="datatablesSimple" data-th-if="${ not#lists.isEmpty(listVoitures)}" class="table table-sm">
+					<thead class="thead-dark">
+					<tr>
+						<th scope="col">Nom</th>
+						<th scope="col">Catégorie</th>
+						<th scope="col">Marque</th>
+						<th scope="col">Modele</th>
+						<th scope="col">Année</th>
+						<th scope="col">Tarif</th>
+						<th scope="col">Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr data-th-each="voiture: ${listVoitures}" data-th-id="${voiture.id}" class="tr-sm">
+						<td data-th-text="${voiture.nom}" />
+						<td data-th-text="${voiture.nomCategory}" />
+						<td data-th-text="${voiture.marque}" />
+						<td data-th-text="${voiture.modele}" />
+						<td data-th-text="${voiture.annee}" />
+						<td data-th-text="${voiture.tarif}" />
+						<td>
+							<form data-th-action="@{${'/gerant/voitures/'+ voiture.id}}" method="GET">
+								<button type="submit" class="btn btn-sm btn-primary">
+									<i class="fa fa-eye me-1"></i>
+								</button>
+							</form>
+							<button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
+									data-target="#editVoitureByGerantModal" data-th-data-voiture="${voiture}"
+							><i class="fa fa-edit me-1"></i>
+							</button>
+							<button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+									data-target="#deleteVoitureByGerantModal" data-th-data-voiture="${voiture}"
+							><i class="fa fa-times me-1"></i>
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- contact-section end -->
+
+
+<!-- Modal Ajout VOITURE-->
+<div class="modal fade" id="addVoitureByGerantModal" tabindex="-1" aria-labelledby="addVoitureByGerantModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addVoitureByGerantModalLabel">Nouvelle voiture</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/gerant/voitures}" method="post" id="addVoitureByGerant-form">
+					<div class="form-group row">
+						<label for="addVoitureByGerant-idCategory" class="col-sm-2 col-form-label">Catégorie</label>
+						<div class="col-sm-10">
+							<select class="custom-select" name="idCategory" id="addVoitureByGerant-idCategory">
+								<option value="0" selected>Choisir...</option>
+								<option
+									data-th-each="categorie : ${listCateogries}"
+									data-th-value="${categorie.id}"
+									data-th-text="${categorie.nom}">
+									One
+								</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addVoitureByGerant-nom" class="col-sm-2 col-form-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" name="nom" class="form-control" id="addVoitureByGerant-nom" placeholder="nom">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addVoitureByGerant-marque" class="col-sm-2 col-form-label">Marque</label>
+						<div class="col-sm-10">
+							<input type="text" name="marque" class="form-control" id="addVoitureByGerant-marque" placeholder="marque">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addVoitureByGerant-modele" class="col-sm-2 col-form-label">Modéle</label>
+						<div class="col-sm-10">
+							<input type="text" name="modele" class="form-control" id="addVoitureByGerant-modele" placeholder="modele">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addVoitureByGerant-annee" class="col-sm-2 col-form-label">Année</label>
+						<div class="col-sm-10">
+							<select class="custom-select" name="annee" id="addVoitureByGerant-annee">
+								<option value="0" selected>Choisir...</option>
+								<option value="2021">2021</option>
+								<option value="2020">2020</option>
+								<option value="2019">2019</option>
+								<option value="2018">2018</option>
+								<option value="2017">2017</option>
+								<option value="2016">2016</option>
+								<option value="2015">2015</option>
+								<option value="2014">2014</option>
+								<option value="2013">2013</option>
+								<option value="2012">2012</option>
+								<option value="2011">2011</option>
+								<option value="2010">2010</option>
+								<option value="2009">2009</option>
+								<option value="2008">2008</option>
+								<option value="2007">2007</option>
+								<option value="2006">2006</option>
+								<option value="2005">2005</option>
+								<option value="2004">2004</option>
+								<option value="2003">2003</option>
+								<option value="2002">2002</option>
+								<option value="2001">2001</option>
+								<option value="2000">2000</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addVoitureByGerant-tarif" class="col-sm-2 col-form-label">Tarif</label>
+						<div class="col-sm-10">
+							<input type="number" name="tarif" class="form-control" id="addVoitureByGerant-tarif" placeholder="tarif">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="addVoitureByGerant-description" class="col-sm-2 col-form-label">Description</label>
+						<div class="col-sm-10">
+							<textarea name="description" class="form-control" id="addVoitureByGerant-description" rows="3"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+						<button type="submit" class="btn btn-primary">Ajouter</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Edit VOITURE-->
+<div class="modal fade" id="editVoitureByGerantModal" tabindex="-1" aria-labelledby="editVoitureByGerantModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editVoitureByAGerantModalLabel">Editer voiture</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/gerant/voitures}" method="put" id="editVoitureByGerant-form">
+					<div class="form-group row">
+						<label for="editVoitureByGerant-idCategory" class="col-sm-2 col-form-label">Catégorie</label>
+						<div class="col-sm-10">
+							<select class="custom-select" name="idCategory" id="editVoitureByGerant-idCategory">
+								<option value="0" selected>Choisir...</option>
+								<option
+										data-th-each="categorie : ${listCateogries}"
+										data-th-value="${categorie.id}"
+										data-th-text="${categorie.nom}">
+									One
+								</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editVoitureByGerant-nom" class="col-sm-2 col-form-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" name="nom" class="form-control" id="editVoitureByGerant-nom" placeholder="nom">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editVoitureByGerant-marque" class="col-sm-2 col-form-label">Marque</label>
+						<div class="col-sm-10">
+							<input type="text" name="marque" class="form-control" id="editVoitureByGerant-marque" placeholder="marque">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editVoitureByGerant-modele" class="col-sm-2 col-form-label">Modéle</label>
+						<div class="col-sm-10">
+							<input type="text" name="modele" class="form-control" id="editVoitureByGerant-modele" placeholder="modele">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editVoitureByGerant-annee" class="col-sm-2 col-form-label">Année</label>
+						<div class="col-sm-10">
+							<select class="custom-select" name="annee" id="editVoitureByGerant-annee">
+								<option value="0" selected>Choisir...</option>
+								<option value="2021">2021</option>
+								<option value="2020">2020</option>
+								<option value="2019">2019</option>
+								<option value="2018">2018</option>
+								<option value="2017">2017</option>
+								<option value="2016">2016</option>
+								<option value="2015">2015</option>
+								<option value="2014">2014</option>
+								<option value="2013">2013</option>
+								<option value="2012">2012</option>
+								<option value="2011">2011</option>
+								<option value="2010">2010</option>
+								<option value="2009">2009</option>
+								<option value="2008">2008</option>
+								<option value="2007">2007</option>
+								<option value="2006">2006</option>
+								<option value="2005">2005</option>
+								<option value="2004">2004</option>
+								<option value="2003">2003</option>
+								<option value="2002">2002</option>
+								<option value="2001">2001</option>
+								<option value="2000">2000</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editVoitureByGerant-tarif" class="col-sm-2 col-form-label">Tarif</label>
+						<div class="col-sm-10">
+							<input type="number" name="tarif" class="form-control" id="editVoitureByGerant-tarif" placeholder="tarif">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="editVoitureByGerant-description" class="col-sm-2 col-form-label">Description</label>
+						<div class="col-sm-10">
+							<textarea name="description" class="form-control" id="editVoitureByGerant-description" rows="3"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+						<button type="submit" class="btn btn-primary">Modifier</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Supprimer VOITURE-->
+<div class="modal fade" id="deleteVoitureByGerantModal" tabindex="-1" aria-labelledby="deleteVoitureByGerantModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteVoitureByAGerantModalLabel">Supprimer voiture</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/gerant/voitures}" method="delete" id="deleteVoitureByGerant-form">
+					<div class="mb-3">Voulez-vous supprimer la voiture <span id="deleteVoitureByGerant-nom"></span> ?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+						<button type="submit" class="btn btn-primary">Supprimer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+<script !src="">
+
+    //////// FUNCTION LIST VOITURE
+    fcListVoitureByGerantModal();
+
+</script>
+
+
+</body>
+</html>

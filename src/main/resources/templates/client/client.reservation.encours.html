@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header-espace-perso :: header-base"/>
+	<div data-th-replace="fragments/header-espace-perso :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header-espace-perso :: nav"/>
+<!-- inner-apge-banner start -->
+<section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="page-title">Client</h2>
+				<ol class="page-list">
+					<li><a data-th-href="@{/}"><i class="fa fa-home"></i>Accueil</a></li>
+					<li>Espace Client</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- inner-apge-banner end -->
+<section class="car-search-section pt-120 pb-120">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="car-search-filter-area">
+					<div class="car-search-filter-form-area">
+						<form class="car-search-filter-form" data-th-action="@{/list-cars}"
+							  method="get">
+							<div class="row justify-content-between">
+								<div class="col-lg-7 col-md-7 col-sm-6 d-flex">
+									<input type="text" name="motCle" id="car_search"
+										   placeholder="Rechercher la marque........"
+										   data-th-value="${motCle}">
+									<button class="search-submit-btn">Rechercher</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="view-style-toggle-area">
+						<button class="view-btn list-btn active">
+							<i class="fa fa-bars"></i>
+						</button>
+						<button class="view-btn grid-btn">
+							<i class="fa fa-th-large"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-70">
+			<div class="col-lg-4">
+				<div data-th-replace="fragments/sidebar-espace-perso :: sidebar"/>
+			</div>
+			<div class="col-lg-8">
+				<div>Client.reservation.encours</div>
+				<!--				<section layout:fragment="formagency_content"></section>-->
+				<!--				<section layout:fragment="formCategory_content"></section>-->
+				<!--				<section layout:fragment="formRole_content"></section>-->
+				<!--				<section layout:fragment="formUser_content"></section>-->
+				<!--				<section layout:fragment="listCategory_content"></section>-->
+			</div>
+		</div>
+	</div>
+</section>
+<!-- car-search-section end -->
+
+<div data-th-replace="fragments/footer-espace-perso :: footer"/>
+
+</body>
+</html>

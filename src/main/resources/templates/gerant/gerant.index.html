@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div data-th-replace="fragments/header :: header-base"/>
+	<div data-th-replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div data-th-replace="fragments/header :: nav"/>
+<!-- inner-apge-banner start -->
+<section class="inner-page-banner bg_img overlay-3" data-th-data-background="@{/assets/images/inner-page-bg.jpg}">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="page-title">Gérant</h2>
+				<ol class="page-list">
+					<li>Accueil</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="car-search-section pt-120 pb-120">
+	<div class="container">
+		<div class="row card">
+			<div class="card-header">
+				<i class="fa fa-table me-1"></i>
+				Liste des réservations en cours
+			</div>
+			<div class="card-body">
+				<p data-th-if="${#lists.isEmpty(listReservationsEncours)}">Aucune réservation en cours</p>
+				<table id="datatablesSimple" data-th-if="${ not#lists.isEmpty(listReservationsEncours)}" class="table table-sm">
+					<thead class="thead-dark">
+					<tr>
+						<th scope="col">Date réservation</th>
+						<th scope="col">Catégorie</th>
+						<th scope="col">Date départ</th>
+						<th scope="col">Adresse départ</th>
+						<th scope="col">Date retour</th>
+						<th scope="col">Adresse retour</th>
+						<th scope="col">Nombre de personne</th>
+						<th scope="col">Chauffeur</th>
+						<th scope="col">Client</th>
+						<th scope="col">Télephone</th>
+						<th scope="col">Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr data-th-each="reservation: ${listReservationsEncours}" data-th-id="${reservation.id}" class="tr-sm">
+						<td data-th-text="${reservation.dateReservation}" />
+						<td data-th-text="${reservation.category.nom}" />
+						<td data-th-text="${reservation.dateDepart}" />
+						<td data-th-text="${reservation.adresseDepart}" />
+						<td data-th-text="${reservation.dateRetour}" />
+						<td data-th-text="${reservation.adresseRetour}" />
+						<td data-th-text="${reservation.nombrePersonne == 0 } ? 'Max' : ${reservation.nombrePersonne} " />
+						<td data-th-text="${reservation.avecChauffeur == true } ? 'Avec' : 'Sans' " />
+						<td data-th-text="${reservation.userCreated.firstName}" />
+						<td data-th-text="${reservation.userCreated.phoneNumber}" />
+						<td>
+							<button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+									data-target="#validerReservationByGerantModal" data-th-data-reservation="${reservation}"
+							><i class="fa fa-edit me-1"></i> Valider
+							</button>
+							<button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+									data-target="#annulerReservationByGerantModal" data-th-data-reservation="${reservation}"
+							><i class="fa fa-times me-1"></i> Annuler
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- contact-section end -->
+
+
+<!-- Modal Supprimer ADMIN-->
+<div class="modal fade" id="validerReservationByGerantModal" tabindex="-1" aria-labelledby="validerReservationByGerantModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="validerReservationByGerantModalLabel">Valider admin</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/gerant/reservations/en-cours}" method="post" id="validerReservationByGerant-form">
+					<div class="mb-3">Voulez-vous valider la reservation ?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+						<button type="submit" class="btn btn-primary">Oui</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="annulerReservationByGerantModal" tabindex="-1" aria-labelledby="annulerReservationByGerantModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="annulerReservationByGerantModalLabel">Supprimer admin</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form data-th-action="@{/gerant/reservations/en-cours}" method="post" id="annulerReservationByGerant-form">
+					<div class="mb-3">Voulez-vous annuler la reservation ?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+						<button type="submit" class="btn btn-primary">Oui</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div data-th-replace="fragments/footer :: footer"/>
+
+<script !src="">
+
+    fcListReservationByGerantModal();
+
+</script>
+
+
+</body>
+</html>

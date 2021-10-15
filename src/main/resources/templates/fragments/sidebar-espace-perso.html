@@ -1,0 +1,30 @@
+<div data-th-fragment="sidebar">
+    <aside class="sidebar">
+        <div class="widget widget-new-ctg">
+            <h4 class="widget-title">Gestion de la Plateforme</h4>
+            <div class="widget widget-new-ctg">
+                <div class="sidenav" data-sec-authorize="hasRole('UTILISATEUR')">
+                    <a data-th-href="@{/client/reservations/en-cours}">Mes réservations en cours </a>
+                    <a data-th-href="@{/client/reservations}">Mes réservations</a>
+                </div>
+                <div class="sidenav" data-sec-authorize="hasRole('GERANT')">
+                    <a data-th-href="@{/gerant/voitures}">Gestion Voitures</a>
+                    <a data-th-href="@{/gerant/reservations/en-cours}">Reservation en cours </a>
+                    <a data-th-href="@{/gerant/reservations}">Gestion Reservations</a>
+                    <a data-th-href="@{/gerant/clients}">Gestion Clients</a>
+                </div>
+                <div class="sidenav" data-sec-authorize="hasRole('ADMIN')">
+                    <a data-th-href="@{/admin/users}">Gestion utilisateurs</a>
+                    <a data-th-href="@{/admin/categories}">Gestion Catégories</a>
+                    <a data-th-href="@{/admin/voitures}">Gestion Voitures</a>
+                    <a data-th-href="@{/admin/reservations/en-cours}">Reservation en cours </a>
+                    <a data-th-href="@{/admin/reservations}">Gestion Reservations</a>
+                    <a data-th-href="@{/admin/clients}">Gestion Clients</a>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- widget end -->
+    </aside>
+</div>
